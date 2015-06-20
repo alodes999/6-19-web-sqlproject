@@ -1,0 +1,13 @@
+<!--Page that lists the results after clicking on a ship type and hitting submit -->
+<!--Shows the ships referenced by the type id listed -->
+<h1>Ships in type <%= @type_to_look.ship_type %></h1>
+
+<ul>
+     <% @type_to_look.ships_where_type_matches.each do |name| %>
+       <li><%= "#{name.id} - #{name.ship_name} - #{name.cost} - #{name.ship_types_id} - #{name.ship_locations_id}" %></li>
+     <% end %>
+</ul>
+<!-- link to go to home page -->
+<a href=/home>Go to home page</a>
+<!--auto-refreshes home page after waiting 3 seconds. -->
+<!-- <meta http-equiv="refresh" content="3, URL=/home"> -->

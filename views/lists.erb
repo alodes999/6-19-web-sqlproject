@@ -1,7 +1,9 @@
 <!-- This is our erb file for lists options through our Web UX. -->
 <!-- We have all of the list/"example" lists here.  "example" being the name -->
-<!-- of an example list.  We have 10 lists in this file. (I may split out the)-->
-<!-- bigger list pieces to separate files if it gets to be too crowded in here -->
+<!-- of an example list.  We have 10 lists in this file. (I may split out the-->
+<!-- bigger list pieces to separate files if it gets to be too crowded in here) -->
+
+<!--This is the lists submenu -->
 <% if params["list"] == "main" %>
   <h1>Lists Menu</h1>
   <p>What list would you like to look at?</p>
@@ -14,7 +16,7 @@
     <li><a href=/list/ships_at_location>Look at all ships in a given location</a></li>  
   </ul>
 <% end %>
-
+<!--This is the list of ships displayed -->
 <% if params["list"] == "ship_list"%>
   <h1>Ships</h1>
 
@@ -26,7 +28,7 @@
     <% end %>
   </ul>
 <% end %>
-
+<!--This is the list of ship types displayed -->
 <% if params["list"] == "type_list"%>
   <h1>Ship Types</h1>
 
@@ -38,7 +40,7 @@
     <% end %>  
   </ul>
 <% end %>
-
+<!--This is the list of locations displayed -->
 <% if params["list"] == "location_list"%>
   <h1>Ship Locations</h1>
 
@@ -51,7 +53,10 @@
   
   </ul>
 <% end %>
-
+<!--This is the submenu to pick which type of ship to inspect -->
+<!--to get all of the ships of that type.  Once the user picks -->
+<!--the id they want to look up, they are sent to a success(list) page, -->
+<!--or a failure page saying nothing is there. -->
 <% if params["list"] == "ships_of_type"%>
 <h1>What type would you like to get the list of?</h1>
 

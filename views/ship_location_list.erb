@@ -1,0 +1,11 @@
+<!--Page that lists the results after clicking on a location and hitting submit -->
+<!--Shows the ships referenced by the location id listed -->
+<h1>Ships stored at <%= @loc_to_look.solar_system_name %></h1>
+
+<ul>
+     <% @loc_to_look.ships_where_stored.each do |name| %>
+       <li><%= "#{name.id} - #{name.ship_name} - #{name.cost} - #{name.ship_types_id} - #{name.ship_locations_id}" %></li>
+     <% end %>
+</ul>
+
+<a href=/home>Go to home page</a>
