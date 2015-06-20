@@ -1,0 +1,131 @@
+<!-- This is our erb file for lists options through our Web UX. -->
+<!-- We have all of the list/"example" lists here.  "example" being the name -->
+<!-- of an example list.  We have 10 lists in this file. (I may split out the)-->
+<!-- bigger list pieces to separate files if it gets to be too crowded in here -->
+<% if params["list"] == "main" %>
+  <h1>Lists Menu</h1>
+  <p>What list would you like to look at?</p>
+
+  <ul>
+    <li><a href=/list/ship_list>Look at ships list</a></li>
+    <li><a href=/list/type_list>Look at ship types list</a></li>
+    <li><a href=/list/location_list>Look at ship locations list</a></li>
+    <li><a href=/list/ships_of_type>Look at all ships in a given type</a></li>
+    <li><a href=/list/ships_at_location>Look at all ships in a given location</a></li>  
+  </ul>
+<% end %>
+
+<% if params["list"] == "ship_list"%>
+  <h1>Ships</h1>
+
+  <ul>
+    <% list = ShipName.all %>
+
+    <% list.each do |name| %>
+     <li><%= "#{name.id} - #{name.ship_name} - #{name.cost} - #{name.ship_types_id} - #{name.ship_locations_id}" %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if params["list"] == "type_list"%>
+  <h1>Ship Types</h1>
+
+  <ul>
+    <% list = ShipType.all %>
+  
+    <% list.each do |type| %>
+      <li><%= "#{type.id} - #{type.ship_type}" %></li>
+    <% end %>  
+  </ul>
+<% end %>
+
+<% if params["list"] == "location_list"%>
+  <h1>Ship Locations</h1>
+
+  <ul>
+    <% list = ShipLocation.all %>
+  
+    <% list.each do |loc| %>
+      <li><%= "#{loc.id} - #{loc.solar_system_name}" %></li>
+    <% end %>
+  
+  </ul>
+<% end %>
+
+<% if params["list"] == "ships_of_type"%>
+<h1>What type would you like to get the list of?</h1>
+
+<form action="/show_ship_type_list">
+  
+  <select name="type_id">
+    <% ShipType.all.each do |type| %>
+      <option value="<%= type.id %>"><%= type.ship_type %></option>
+    <% end %>
+  </select>
+  
+  <input type="submit">
+</form>
+
+<% end %>
+
+<% if params["list"] == "ships_at_location"%>
+<h1>What location would you like to look up?</h1>
+
+<form action="/show_ship_location_list">
+  
+  <select name="location_id">
+    <% ShipLocation.all.each do |location| %>
+      <option value="<%= location.id %>"><%= location.solar_system_name %></option>
+    <% end %>
+  </select>
+  
+  <input type="submit">
+</form>
+<% end %>
+
+<% if params["list"] == "new_record_main" %>
+<h1>New Record Entry Menu</h1>
+  <p>Which type of record would you like to enter?</p>
+
+  <ul>
+    <li><a href=/new/ship>Enter a new ship</a></li>
+    <li><a href=/new/type>Enter a new ship type</a></li>
+    <li><a href=/new/location>Enter a new ship location</a></li>
+  </ul>
+<% end %>
+
+<% if params["list"] == "change_record_main" %>
+  <h1>Change Record Menu</h1>
+  <p>Which type of record would you like to change?</p>
+
+  <ul>
+    <li><a href=/list/ship_change_choice>Change a ship</a></li>
+    <li><a href=/change/type>Change a ship type</a></li>
+    <li><a href=/change/location>Change a location</a></li>
+  </ul>
+<% end %>
+
+<% if params["list"] == "delete_record_main" %>
+<h1>Delete Record Menu</h1>
+  <p>What type of record would you like to delete?</p>
+
+  <ul>
+    <li><a href=/delete/ship>Delete a ship</a></li>
+    <li><a href=/delete/type>Delete a ship type</a></li>
+    <li><a href=/delete/location>Delete a location</a></li>
+  </ul>
+<% end %>
+
+<% if params["list"] == "ship_change_choice" %>
+<h1>Ship Change Menu</h1>
+  <p>Which ship would you like to change?</p>
+
+  <ul>
+    <li><a href=/change/ship_name>Change a ship name</a></li>
+    <li><a href=/change/ship_cost>Change a ship's cost</a></li>
+    <li><a href=/change/ship_type_id>Change a ship's type id</a></li>
+    <li><a href=/change/location_id>Change a ship's location id</a></li>
+  </ul>
+<% end %>
+
+<a href=/home>Go to home page</a>
