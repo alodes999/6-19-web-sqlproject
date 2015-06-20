@@ -53,19 +53,25 @@ end
 get "/new/:new" do
   erb :"create"
 end
-
+# Method that creates a new Ship row for our database, and creates a new
+# Object of ShipName.  Sends the user to the "data_added.erb" page for 
+# confirmation.
 get "/create_ship" do
   add_hash = {"ship_name" => params["ship_name"], "cost" => params["cost"], "ship_types_id" => params["ship_types_id"], "ship_locations_id" => params["ship_locations_id"]}
   ShipName.add(add_hash)
   erb :"data_added"
 end
-
+# Method that creates a new Ship Type row for our database, and creates a new
+# Object of ShipType.  Sends the user to the "data_added.erb" page for 
+# confirmation.
 get "/create_type" do
   add_hash = {"ship_type" => params["type"]}
   ShipType.add(add_hash)
   erb :"data_added"
 end
-
+# Method that creates a new Location row for our database, and creates a new
+# Object of ShipLocation.  Sends the user to the "data_added.erb" page for 
+# confirmation.
 get "/create_location" do
   add_hash = {"solar_system_name" => "#{params["system"]} - #{params["station"]}"}
   ShipLocation.add(add_hash)

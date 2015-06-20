@@ -1,3 +1,7 @@
+<!--New Ship Entry form.  User fills this form out to enter a new -->
+<!--row in the ship_names table. -->
+<!--Sends the request back with the information plugged into a Hash -->
+<!--to add a ship. -->
 <% if params["new"] == "ship" %>
   <h1>New Ship Entry</h1>
   <p>Please enter the details of the ship you want to enter!</p>
@@ -19,7 +23,10 @@
     <button type="submit">Add ship!</button>
   </form>
 <% end %>
-
+<!--New Ship Type Entry form.  User fills this form out to enter a new -->
+<!--row in the ship_types table. -->
+<!--Sends the request back with the information plugged into a Hash -->
+<!--to add a type. -->
 <% if params["new"] == "type" %>
   <h1>New Ship Type Entry</h1>
   <p>Please enter the type you'd like to add!</p>
@@ -30,7 +37,10 @@
     <button typ="submit">Add type!</button>
   </form>
 <% end %>
-
+<!--New Location Entry form.  User fills this form out to enter a new -->
+<!--row in the ship_locations table. -->
+<!--Sends the request back with the information plugged into a Hash -->
+<!--to add a ship. -->
 <% if params["new"] == "location" %>
   <h1>New Location Entry</h1>
   <p>Please enter the new location you'd like to add!</p>
