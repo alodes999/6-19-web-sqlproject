@@ -58,7 +58,7 @@ get "/delete/:delete" do
 end
 
 get "/show_ship_delete_list" do
-  ShipName.delete(params["name_id"])
+  ShipName.delete(params["ship_delete_id"])
   erb :"data_deleted"
 end
 
