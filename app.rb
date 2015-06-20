@@ -22,11 +22,14 @@ CONNECTION.results_as_hash = true
 get "/home" do
   erb :"index"
 end
-
+# Method that acts as a receiver for list requests, and sends the user to
+# the appropriate list in the "lists.erb" file.
 get "/list/:list" do
   erb :"lists"
 end
-
+# Method that checks to see if a type has any data in it.  Displays a page to the user
+# either showing the ships with the given type, or a page saying there was no
+# data in that type to return
 get "/show_ship_type_list" do
   @type_to_look = ShipType.find(params["type_id"])
   if @type_to_look.ships_where_type_matches == []
@@ -35,7 +38,9 @@ get "/show_ship_type_list" do
     erb :"ship_type_list"
   end
 end
-
+# Method that checks to see if a location has any data in it.  Displays a page to the user
+# either showing the ships with the given location, or a page saying there was no
+# data in that location to return
 get "/show_ship_location_list" do
   @loc_to_look = ShipLocation.find(params["location_id"])
   if @loc_to_look.ships_where_stored == []
@@ -44,24 +49,46 @@ get "/show_ship_location_list" do
     erb :"ship_location_list"
   end
 end
-
+# Method that catches requests to go into the create.erb file
 get "/new/:new" do
   erb :"create"
 end
 
+get "/create_ship" do
+  add_hash = {"ship_name" => params["ship_name"], "cost" => params["cost"], "ship_types_id" => params["ship_types_id"], "ship_locations_id" => params["ship_locations_id"]}
+  ShipName.add(add_hash)
+  erb :"data_added"
+end
+
+get "/create_type" do
+  add_hash = {"ship_type" => params["type"]}
+  ShipType.add(add_hash)
+  erb :"data_added"
+end
+
+get "/create_location" do
+  add_hash = {"solar_system_name" => "#{params["system"]} - #{params["station"]}"}
+  ShipLocation.add(add_hash)
+  erb :"data_added"
+end
+# Method that catches requests to go into the change.erb file
 get "/change/:change" do
   erb :"change"
 end
-
+# Method that catches requests to go into the delete.erb file
 get "/delete/:delete" do
   erb :"delete"
 end
-
+# Method that deletes an item from the database, called from our delete.erb file.
+# Sends the user to the data_deleted.erb file after running the deletion
 get "/show_ship_delete_list" do
   ShipName.delete(params["ship_delete_id"])
   erb :"data_deleted"
 end
-
+# Method that checks to see if a given type is empty, then deletes if it is.
+# Sends the user to either a confirmation page if the type is empty, or to
+# a page saying the data couldn't be deleted, because there was something found.
+# in the type.
 get "/show_delete_type_list" do
   type_to_look = ShipType.find(params["type_id"])
   if type_to_look.delete_type
@@ -70,7 +97,10 @@ get "/show_delete_type_list" do
     erb :"cant_delete_data_exists"
   end
 end
-
+# Method that checks to see if a given location is empty, then deletes if it is.
+# Sends the user to either a confirmation page if the location is empty, or to
+# a page saying the data couldn't be deleted, because there was something found.
+# in the location.
 get "/show_delete_location_list" do
   loc_to_look = ShipLocation.find(params["location_id"])
   if loc_to_look.delete_location

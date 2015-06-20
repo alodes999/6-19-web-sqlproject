@@ -1,16 +1,45 @@
 <% if params["new"] == "ship" %>
   <h1>New Ship Entry</h1>
-
+  <p>Please enter the details of the ship you want to enter!</p>
+  
+  <form action="/create_ship">
+    <input type="text" placeholder="Ship name" name="ship_name">
+    <input type="number" placeholder="Ship cost" name="cost">
+    <select name="ship_types_id">
+      <% ShipType.all.each do |type| %>
+        <option value="<%= type.id %>"><%= type.ship_type %></option>
+      <% end %>
+    </select>
+    <select name="ship_locations_id">
+      <% ShipLocation.all.each do |location| %>
+        <option value="<%= location.id %>"><%= location.solar_system_name %></option>
+      <% end %>
+    </select>
+    
+    <button type="submit">Add ship!</button>
+  </form>
 <% end %>
 
 <% if params["new"] == "type" %>
   <h1>New Ship Type Entry</h1>
-
+  <p>Please enter the type you'd like to add!</p>
+  
+  <form action="/create_type">
+    <input type="text" placeholder="Ship type" name="type">
+    
+    <button typ="submit">Add type!</button>
+  </form>
 <% end %>
 
 <% if params["new"] == "location" %>
   <h1>New Location Entry</h1>
-
+  <p>Please enter the new location you'd like to add!</p>
+  <form action="/create_location">
+    <input type="text" placeholder="System name" name="system">
+    <input type="text" placeholder="Station name" name="station">
+    
+    <button typ="submit">Add location!</button>
+  </form>
 <% end %>
 
 

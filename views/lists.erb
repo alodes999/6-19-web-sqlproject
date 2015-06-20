@@ -72,7 +72,10 @@
 </form>
 
 <% end %>
-
+<!--This is the submenu to pick which location to inspect -->
+<!--to get all of the ships of that location.  Once the user picks -->
+<!--the id they want to look up, they send back a request which directs to a success(list) page, -->
+<!--or a failure page saying nothing is there. -->
 <% if params["list"] == "ships_at_location"%>
 <h1>What location would you like to look up?</h1>
 
@@ -87,7 +90,9 @@
   <input type="submit">
 </form>
 <% end %>
-
+<!--This is our New Record sub menu list. -->
+<!--This sends a request which will send the user to the "create.erb" -->
+<!--file depending on what choice is clicked -->
 <% if params["list"] == "new_record_main" %>
 <h1>New Record Entry Menu</h1>
   <p>Which type of record would you like to enter?</p>
@@ -98,18 +103,23 @@
     <li><a href=/new/location>Enter a new ship location</a></li>
   </ul>
 <% end %>
-
+<!--This is our Change Record sub menu list. -->
+<!--This sends a request which will send the user to either the "change.erb" -->
+<!--file, if type or location changes are requested, or back here to another list -->
+<!--if ship changes are requested -->
 <% if params["list"] == "change_record_main" %>
   <h1>Change Record Menu</h1>
   <p>Which type of record would you like to change?</p>
 
   <ul>
-    <li><a href=/list/ship_change_choice>Change a ship</a></li>
+    <li><a href=/change/ship>Change a ship</a></li>
     <li><a href=/change/type>Change a ship type</a></li>
     <li><a href=/change/location>Change a location</a></li>
   </ul>
 <% end %>
-
+<!--This is our Delete Record sub menu list. -->
+<!--This sends a request which will send the user to the "delete.erb" -->
+<!--file depending on what choice is clicked -->
 <% if params["list"] == "delete_record_main" %>
 <h1>Delete Record Menu</h1>
   <p>What type of record would you like to delete?</p>
@@ -121,7 +131,7 @@
   </ul>
 <% end %>
 
-<% if params["list"] == "ship_change_choice" %>
+<!-- <% if params["list"] == "ship_change_choice" %>
 <h1>Ship Change Menu</h1>
   <p>Which ship would you like to change?</p>
 
@@ -131,6 +141,6 @@
     <li><a href=/change/ship_type_id>Change a ship's type id</a></li>
     <li><a href=/change/location_id>Change a ship's location id</a></li>
   </ul>
-<% end %>
+<% end %> -->
 
 <a href=/home>Go to home page</a>
