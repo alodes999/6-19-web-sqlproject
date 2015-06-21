@@ -81,6 +81,62 @@ end
 get "/change/:change" do
   erb :"change"
 end
+# Method that pulls the requested ship and sends the values into the "change_ship.erb" page
+get "/change_ship" do
+  @ship_to_mod = ShipName.find(params["ship_id"])
+  erb :"change_ship"
+end
+# Method that takes the results from the "change_ship.erb" page and returns the params
+# to update the ship in question.
+# Takes the values entered in the form and sets the attributes of the ship the user has
+# chosen to modify to those values entered, and sends the whole object to update the row
+# in the database.
+get "/change_ship_action" do
+  ship_mod = ShipName.find(params["id"].to_i)
+  ship_mod.ship_name = params["ship_name"]
+  ship_mod.cost = params["cost"].to_i
+  ship_mod.ship_types_id = params["ship_types_id"].to_i
+  ship_mod.ship_locations_id = params["ship_locations_id"].to_i
+  
+  ship_mod.save
+  erb :"data_modified"
+end
+# Method that takes the results from the "change.erb" page and returns the params
+# to update the ship in question.
+# Takes the values entered in the form and sets the attributes of the ship type the user has
+# chosen to modify to those values entered, and sends the whole object to update the row
+# in the database.
+# This will send the user to the "cant_delete_data_exists.erb" page if there is ship data
+# that corresponds to the ship type, otherwise shows success
+get "/change_ship_type" do
+  type_to_mod = ShipType.find(params["type_id"])
+  
+  if type_to_mod.ships_where_type_matches != []
+    erb :"cant_delete_data_exists"
+  else
+    type_to_mod.ship_type = params["type_name"]
+    type_to_mod.save
+    erb :"data_modified"
+  end
+end
+# Method that takes the results from the "change.erb" page and returns the params
+# to update the ship in question.
+# Takes the values entered in the form and sets the attributes of the location the user has
+# chosen to modify to those values entered, and sends the whole object to update the row
+# in the database.
+# This will send the user to the "cant_delete_data_exists.erb" page if there is ship data
+# that corresponds to the location, otherwise shows success
+get "/change_location" do
+  loc_to_mod = ShipLocation.find(params["location_id"])
+  
+  if loc_to_mod.ships_where_stored != []
+    erb :"cant_delete_data_exists"
+  else
+    loc_to_mod.solar_system_name = "#{params["system"]} - #{params["station"]}"
+    loc_to_mod.save
+    erb :"data_modified"
+  end
+end
 # Method that catches requests to go into the delete.erb file
 get "/delete/:delete" do
   erb :"delete"

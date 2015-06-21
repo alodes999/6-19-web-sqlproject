@@ -1,29 +1,69 @@
-<!-- <% if params["change"] == "ship_name" %>
-  <h1>Change Ship Name</h1>
-<% end %>
-
-<% if params["change"] == "ship_cost" %>
-  <h1>Change Ship Cost</h1>
-<% end %>
-
-<% if params["change"] == "ship_type_id" %>
-  <h1>Change Ship Type</h1>
-<% end %>
-
-<% if params["change"] == "location_id" %>
-  <h1>Change Ship Location</h1>
-<% end %> -->
-
+<!--This is the change.erb file referenced in app.rb -->
+<!--The first page here is our list of ships to modify -->
+<!--The user picks the choice and sends the response back to app to-->
+<!--get the change_ship.erb page. -->
 <% if params["change"] == "ship" %>
   <h1>Change Ship</h1>
+  <p>Pick the ship you want to modify</p>
+  
+  <form action="/change_ship">
+    
+    <select name="ship_id">
+      <% ShipName.all.each do |ship| %>
+        <option value="<%= ship.id %>"><%= ship.ship_name %></option>
+      <% end %>
+      
+    <input type="submit">
+  </form>  
 <% end %>
-
+<!--This is the ship type modification page -->
+<!--Here we pick the type to update, and then type in the change -->
+<!--to send back to app.  Once submitted, app takes the chosen type -->
+<!--and the change submitted and sends it them to the database -->
 <% if params["change"] == "type" %>
   <h1>Change Type Name</h1>
+  <p>Pick the type you want to modify</p>
+  
+  <form action="/change_ship_type">
+  
+    <select name="type_id">
+      <% ShipType.all.each do |type| %>
+        <option value="<%= type.id %>"><%= type.ship_type %></option>
+      <% end %>
+    </select>
+    <p></p>
+    <p></p>
+    <p>Enter the new information for that ship type</p>
+    <p></p>
+    <input type="text" placeholder="Ship type" name="type_name">
+    
+    <input type="submit">
+  </form>
 <% end %>
-
+<!--This is the location modification page -->
+<!--Here we pick the location to update, and then type in the change -->
+<!--to send back to app.  Once submitted, app takes the chosen location -->
+<!--and the change submitted and sends it them to the database -->
 <% if params["change"] == "location" %>
   <h1>Change Location Name</h1>
+  <p>Pick the location you want to modify</p>
+  
+  <form action="/change_location">
+  
+    <select name="location_id">
+      <% ShipLocation.all.each do |location| %>
+        <option value="<%= location.id %>"><%= location.solar_system_name %></option>
+      <% end %>
+    </select>
+    <p></p>
+    <p></p>
+    <p>Enter the new information for that location</p>
+    <p></p>
+    <input type="text" placeholder="System name" name="system">
+    <input type="text" placeholder="Station name" name="station">
+    
+    <input type="submit">
+  </form>
 <% end %>
 
 <a href=/home>Go to home page</a>
