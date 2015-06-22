@@ -3,23 +3,6 @@
 <!--and updates everything once when sent back to the /change_ship_action response in app.rb -->
 <h1>Change Ship</h1>
 <p>Enter the new information over the current values in the fields</p>
-<p>Please use the ID number in the drop downs for Ship Type and Location</p>
-<p>Ship Type ID List
-<ul>
-  <% list = ShipType.all %>
-
-  <% list.each do |type| %>
-    <li><%= "#{type.id} - #{type.ship_type}" %></li>
-  <% end %>
-</ul>
-<p>Location ID List
-<ul>
-  <% list = ShipLocation.all %>
-
-  <% list.each do |loc| %>
-    <li><%= "#{loc.id} - #{loc.solar_system_name}" %></li>
-  <% end %>  
-</ul>
 
   <form action="/change_ship_action">
     <input type="text" name="ship_name" value="<%= @ship_to_mod.ship_name %>">
@@ -27,18 +10,18 @@
     <select name="ship_types_id">
       <% ShipType.all.each do |type| %>
         <% if type.id != @ship_to_mod.ship_types_id %>
-          <option value"<%= type.id %>"><%= type.id %></option>
+          <option value="<%= type.id %>"><%= type.ship_type %></option>
         <% else %>
-          <option value="<%= type.id %>" selected><%= type.id %></option>
+          <option value="<%= type.id %>" selected><%= type.ship_type %></option>
         <% end %>
       <% end %>
     </select>
     <select name="ship_locations_id">
       <% ShipLocation.all.each do |location| %>
         <% if location.id != @ship_to_mod.ship_locations_id %>
-          <option value"<%= location.id %>"><%= location.id %></option>
+          <option value="<%= location.id %>"><%= location.solar_system_name %></option>
         <% else %>
-          <option value="<%= location.id %>" selected><%= location.id %></option>
+          <option value="<%= location.id %>" selected><%= location.solar_system_name %></option>
         <% end %>
       <% end %>
     </select>
