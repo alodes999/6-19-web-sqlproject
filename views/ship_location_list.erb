@@ -1,11 +1,16 @@
 <!--Page that lists the results after clicking on a location and hitting submit -->
 <!--Shows the ships referenced by the location id listed -->
 <h1>Ships stored at <%= @loc_to_look.solar_system_name %></h1>
-
+<% total_cost = 0 %>
 <ul>
      <% @loc_to_look.ships_where_stored.each do |name| %>
-       <li><%= "#{name.id} - #{name.ship_name} - #{name.cost} - #{name.ship_types_id} - #{name.ship_locations_id}" %></li>
+       <li><%= "#{name.id} - #{name.ship_name} - #{name.cost.to_s(:delimited)} ISK - #{name.ship_types_id} - #{name.ship_locations_id}" %></li>
+       <% total_cost += name.cost %>
      <% end %>
 </ul>
 
-<a href=/home>Go to home page</a>
+Total value of ships at this location:
+
+<%= total_cost.to_s(:delimited) %> ISK
+
+<p><a href=/home>Go to home page</a></p>

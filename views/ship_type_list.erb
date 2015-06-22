@@ -1,11 +1,15 @@
 <!--Page that lists the results after clicking on a ship type and hitting submit -->
 <!--Shows the ships referenced by the type id listed -->
 <h1>Ships in type <%= @type_to_look.ship_type %></h1>
-
+<% total_cost = 0 %>
 <ul>
      <% @type_to_look.ships_where_type_matches.each do |name| %>
-       <li><%= "#{name.id} - #{name.ship_name} - #{name.cost} - #{name.ship_types_id} - #{name.ship_locations_id}" %></li>
+       <li><%= "#{name.id} - #{name.ship_name} - #{name.cost.to_s(:delimited)} ISK - #{name.ship_types_id} - #{name.ship_locations_id}" %></li>
+       <% total_cost += name.cost %>
      <% end %>
 </ul>
 
-<a href=/home>Go to home page</a>
+Total value of ships of this type:
+
+<%= total_cost.to_s(:delimited) %> ISK
+<p><a href=/home>Go to home page</a></p>
