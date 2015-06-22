@@ -20,6 +20,7 @@
 <% if params["list"] == "ship_list"%>
   <h1>Ships</h1>
 <% total_cost = 0 %>
+id - Ship Name    -  Ship Cost         - Ship Type ID - Ship Location ID
   <ul>
     <% list = ShipName.all %>
 
@@ -28,7 +29,7 @@
      <% total_cost += name.cost %>
     <% end %>
   </ul>
-  <p>Total value of all ships: <%= total_cost.to_s(:delimited) %> ISK</p>
+  <p>Total cost of all ships: <%= total_cost.to_s(:delimited) %> ISK</p>
 <% end %>
 <!--This is the list of ship types displayed -->
 <% if params["list"] == "type_list"%>

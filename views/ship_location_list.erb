@@ -2,14 +2,15 @@
 <!--Shows the ships referenced by the location id listed -->
 <h1>Ships stored at <%= @loc_to_look.solar_system_name %></h1>
 <% total_cost = 0 %>
+id - Ship Name    -  Ship Cost         - Ship Type ID
 <ul>
      <% @loc_to_look.ships_where_stored.each do |name| %>
-       <li><%= "#{name.id} - #{name.ship_name} - #{name.cost.to_s(:delimited)} ISK - #{name.ship_types_id} - #{name.ship_locations_id}" %></li>
+       <li><%= "#{name.id} - #{name.ship_name} - #{name.cost.to_s(:delimited)} ISK - #{name.ship_types_id}" %></li>
        <% total_cost += name.cost %>
      <% end %>
 </ul>
 
-Total value of ships at this location:
+Total cost of ships at this location:
 
 <%= total_cost.to_s(:delimited) %> ISK
 
